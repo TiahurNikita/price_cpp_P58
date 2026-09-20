@@ -27,7 +27,10 @@ bool Price::init() {
 	product = { "Ruler 30cm", 3.50f, 5, 0 };
 	product.save_to_file(file);
 
-	product = { "Sticker 30cm", 3.50f, 5, 0 };
+	product = { "Sticker", 3.50f, 5, 0 };
+	product.save_to_file(file);
+
+	product = { "Marker-Black-Dark", 4.50f, 45, 12 };
 	product.save_to_file(file);
 
 	file.close();
