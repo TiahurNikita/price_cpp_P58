@@ -18,3 +18,15 @@ Grided Copybook
 36.8
 5
 10
+Ruler 30cm
+3.5
+5
+0
+Sticker
+3.5
+5
+0
+Marker-Black-Dark
+4.5
+45
+12
