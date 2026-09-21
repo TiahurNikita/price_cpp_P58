@@ -1,4 +1,5 @@
 #include <iostream>
+#include <conio.h>
 #include "price.h"
 
 using namespace std;
@@ -77,10 +78,21 @@ void Price::show() const {
 		return;
 	}
 	ListNode* node = first;
+	int cnt = 0;
+	cout << endl;
 	while (node) {
+		if (cnt == 2) {
+			int choice;
+			cout << "> Press a key to continue..."<<endl;
+			choice = _getch();
+			cnt = 0;
+		}
 		std::cout << node->product.to_string() << endl;
 		node = node->next;
+		cnt++;
+		
 	}
+	cout << endl;
 }
 /*
 git - VCS (Version Control System)
