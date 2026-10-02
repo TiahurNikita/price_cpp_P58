@@ -184,7 +184,7 @@ void Price::show_by_price_ascending() {
 }
 /*
 Реалізація методів:
-show_by_price_descending() - від дорогих цін до дешевих
+!!!show_by_price_descending() - від дорогих цін до дешевих!!!
 
 1.Перевірка (first==NULL) - виводимо, що список порожній
 			(first->next == NULL) - виводимо єдиний елемент
@@ -213,14 +213,14 @@ show_by_price_descending() - від дорогих цін до дешевих
 	  переходимо до наступного вузла (node = node->next;)
 3.Виводимо результат методом show() після завершення циклу (is_ordered == true)
 	  
-show_by_discount_percent_ascending() - від малих знижок до великих
+!!!show_by_discount_percent_ascending() - від малих знижок до великих!!!
 
 1.Перевірка (first==NULL) - виводимо, що список порожній
 			(first->next == NULL) - виводимо єдиний елемент
 2.Сортування (В циклі, допоки покажчик is_ordered == false)
 	1)Створюємо прапорець is_ordered для перевірки повного сортування і ставимо його на true
 	  Встановлюємо покажчик node на перший елемент списку
-	2)Перевіряємо чи ціна першого елементу (node->product.discount_percent) > другого (node->next->product.discount_percent).
+	2)Перевіряємо чи знижка першого елементу (node->product.discount_percent) > другого (node->next->product.discount_percent).
 	  Якщо так, то змінюємо ці 2 елементи місцями за таким алгоритмом:
 	  f
 	  [p1|n]->[p2|n]->[p3|n]
@@ -242,14 +242,14 @@ show_by_discount_percent_ascending() - від малих знижок до ве�
 	  переходимо до наступного вузла (node = node->next;)
 3.Виводимо результат методом show() після завершення циклу (is_ordered == true)
 
-show_by_discount_percent_descending() - від великих знижок до малих
+!!!show_by_discount_percent_descending() - від великих знижок до малих!!!
 
 1.Перевірка (first==NULL) - виводимо, що список порожній
 			(first->next == NULL) - виводимо єдиний елемент
 2.Сортування (В циклі, допоки покажчик is_ordered == false)
 	1)Створюємо прапорець is_ordered для перевірки повного сортування і ставимо його на true
 	  Встановлюємо покажчик node на перший елемент списку
-	2)Перевіряємо чи ціна першого елементу (node->product.discount_percent) < другого (node->next->product.discount_percent).
+	2)Перевіряємо чи знижка першого елементу (node->product.discount_percent) < другого (node->next->product.discount_percent).
 	  Якщо так, то змінюємо ці 2 елементи місцями за таким алгоритмом:
 	  f
 	  [p1|n]->[p2|n]->[p3|n]
