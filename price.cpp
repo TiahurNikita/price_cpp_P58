@@ -183,7 +183,7 @@ void Price::show_by_price_ascending() {
 	show();
 }
 /*
-Реалізація методів:
+Опис методів:
 !!!show_by_price_descending() - від дорогих цін до дешевих!!!
 
 1.Перевірка (first==NULL) - виводимо, що список порожній
