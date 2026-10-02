@@ -41,7 +41,7 @@ bool Price::init() {
 bool Price::load() {
 	ifstream file(PRICE_FILENAME);
 	if (!file.is_open()) {
-		std::cout << "File open error";
+		cout << "File open error";
 		return false;
 	}
 	ListNode* last = first;
@@ -74,47 +74,128 @@ bool Price::load() {
 
 void Price::show() const {
 	if (first == NULL) {
-		std::cout << "Price is empty" << endl;
+		cout << "Price is empty" << std::endl;
 		return;
 	}
 	ListNode* node = first;
-	int cnt = 0;
-	cout << endl;
 	while (node) {
-		if (cnt == 2) {
-			int choice;
-			cout << "> Press a key to continue..."<<endl;
-			choice = _getch();
-			cnt = 0;
-		}
-		std::cout << node->product.to_string() << endl;
+		cout << node->product.to_string() << std::endl;
 		node = node->next;
-		cnt++;
-		
 	}
-	cout << endl;
+}
+
+void Price::_swap12() {
+	ListNode* tmp;
+	tmp = first->next;         // n2
+	first->next = tmp->next;   // n1->next = n3
+	tmp->next = first;         // n2->next = n1
+	first = tmp;
+}
+
+void Price::_swap23(ListNode* node) {
+	ListNode* tmp;
+	tmp = node->next;             // n2
+	node->next = tmp->next;       // n1->next = n3
+	tmp->next = tmp->next->next;  // n2->next = n4
+	node->next->next = tmp;       // n3->next = n2
+}
+
+void Price::show_by_price_descending() {
+	if (first == NULL) {
+		cout << "Price is empty" << endl;
+		return;
+	}
+	if (first->next == NULL) {
+		cout << first->product.to_string() << endl;
+		return;
+	}
+	bool is_ordered;
+	do {
+		is_ordered = true;
+		ListNode* node = first;
+		// окремо перевіряємо перші два
+		if (node->product.price < node->next->product.price) {
+			_swap12();
+			node = first;
+			is_ordered = false;
+		}
+		while (node->next->next) {
+			if (node->next->product.price < node->next->next->product.price) {
+				_swap23(node);
+				is_ordered = false;
+			}
+			node = node->next;
+		}
+	} while (!is_ordered);
+	// відображення передаємо на інший метод
+	show();
+}
+
+void Price::show_by_price_ascending() {
+	// сортування - переставляння неправильно впорядкованих елементів
+	// до тих пір, поки їх не стане (всі у правильному порядку)
+	/* Перестановка у переліку :
+	* [p1|n]->[p2|n]->[p3|n]->[p4|n]   поміняти місцями p2 i p3
+	* а) поміняти значення Р в двох вузлах (через проміжну змінну)
+	*    [p1|n]->[p3|n]->[p2|n]
+	*   ! через те, що структури великі, це тягне за собою багато операцій
+	* б) поміняти покажчики на вузли
+	*    [p1|n]---------->[p3|n]   - більш ефективна операція
+			 p4<-[p2|n]<------|
+
+		Для перших двох елементів:
+		f
+		[p1|n]->[p2|n]->[p3|n]
+
+		 ---->f
+			  [p2|n]
+		 <--------|
+		[p1|n]--------->[p3|n]
+	*/
+	// окремо обробляємо випадки, коли перелік порожній або в ньому один елемент
+	if (first == NULL) {
+		cout << "Price is empty" << endl;
+		return;
+	}
+	if (first->next == NULL) {
+		cout << first->product.to_string() << endl;
+		return;
+	}
+	bool is_ordered;
+	do {
+		is_ordered = true;
+		ListNode* node = first;
+		// окремо перевіряємо перші два
+		if (node->product.price > node->next->product.price) {
+			_swap12();
+			node = first;
+			is_ordered = false;
+		}
+		while (node->next->next) {
+			if (node->next->product.price > node->next->next->product.price) {
+				_swap23(node);
+			}
+			node = node->next;
+		}
+	} while (!is_ordered);
+	// відображення передаємо на інший метод
+	show();
 }
 /*
-git - VCS (Version Control System)
-система, що дозволяє "зберігати" версії коду з
-можливістю повернення до попередніх версій, а також
-утворення відгалужень (гілок) з різним розвитком проєкту.
-Суть - збереження "різниці" - відмінностей між попереднім
-і поточним станом проєкту -коміти (commits).
-Це також спрощує сумісну роботу з проєктом різними учасниками.
+Реалізація методів:
+show_by_price_descending() - від дорогих цін до дешевих
+show_by_discount_ascending() - від малих знижок до великих
+show_by_discount_descending() - від великих знижок до малих
 
-Github - hub (місце для розміщення) репозиторіїв проєктів.
-Репозиторій - частирна проєкту, до якої входить код,
-напрацьований розробниками, і не входять загальні ресурси,
-які можна довантажити окремо (загальні бібліотеки тощо),
-а також результати компіляції та збірки (проміжні та виконавчі
-файли).
-Відмінність задається спец. файлом ".gitignore"
+*/
+/*
+Задача: реалізувати методи сортування та виведення
+за величиною знижки (discount)
 
-Для того щоб створити та опублікувати репозиторій необхідно
-- ініціалізувати репозиторій Git->Create Git repository
-- створити перший коміт
-- опублікувати репозиторій (GitHub, Azure DevOps, BitBucket, GitLab...)
-= Visual Studio дозволяє поєднати всі ці кроки в меню
-	Git->Create Git Repository
+Д.З. До структури Product додати поле order, яке
+заповнювати послідовно при зчитуванні файлу.
+Розуміючи це поле як "популярність" товару додати
+пункт меню "за популярністю" (можна змінити п.3).
+
+Підготувати до захисту персональні проєкти
 */

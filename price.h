@@ -16,7 +16,13 @@ struct Price {
 	ListNode* first = NULL;
 	bool init(); // інкапсуляція - перенесення функцій, пов'язаних
 	bool load(); // з прайсом до окремої "капсули" - структури Price
-	void show() const; //
+	void show() const;
+	void show_by_price_ascending();   // ascending  order (asc)  - за зростанням
+	void show_by_price_descending();  // descending order (desc) - за зменшенням
+
+private:   // приватні методи - доступні лише для інших методів
+	void _swap12();
+	void _swap23(ListNode* node);
 };
 
 #endif
