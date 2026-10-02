@@ -204,7 +204,7 @@ show_by_price_descending() - від дорогих цін до дешевих
 	  - ставимо прапорець is_ordered на false
 	3)Поки існує node->next->next
 	  Якщо node->next->product.price < node->next->next->product.price:
-	  -Змінюємо 2 ці 2 елементи місцями:
+	  -Змінюємо ці 2 елементи місцями:
 	  p1 = node
 	  [p1|n]->[p2|n]->[p3|n]->[p4|n]
 	  [p1|n]--------->[p3|n]
@@ -233,7 +233,7 @@ show_by_discount_percent_ascending() - від малих знижок до ве�
 	  - ставимо прапорець is_ordered на false
 	3)Поки існує node->next->next
 	  Якщо node->next->product.discount_percent > node->next->next->product.discount_percent:
-	  -Змінюємо 2 ці 2 елементи місцями:
+	  -Змінюємо ці 2 елементи місцями:
 	  p1 = node
 	  [p1|n]->[p2|n]->[p3|n]->[p4|n]
 	  [p1|n]--------->[p3|n]
@@ -262,7 +262,7 @@ show_by_discount_percent_descending() - від великих знижок до 
 	  - ставимо прапорець is_ordered на false
 	3)Поки існує node->next->next
 	  Якщо node->next->product.discount_percent < node->next->next->product.discount_percent:
-	  -Змінюємо 2 ці 2 елементи місцями:
+	  -Змінюємо ці 2 елементи місцями:
 	  p1 = node
 	  [p1|n]->[p2|n]->[p3|n]->[p4|n]
 	  [p1|n]--------->[p3|n]
