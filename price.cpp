@@ -269,6 +269,7 @@ show_by_discount_percent_descending() - від великих знижок до малих
 			[p4|n] <- [p2|n] <-----|
 	  - ставимо прапорець is_ordered на false
 	  переходимо до наступного вузла (node = node->next;)
+
 3.Виводимо результат методом show() після завершення циклу (is_ordered == true)
 
 */
