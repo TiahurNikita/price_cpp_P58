@@ -26,6 +26,7 @@ struct Product {
 	float price = 0.0f;
 	int stock = 0;
 	int discount_percent = 0;
+	int order = 0;
 
 	bool load_from_file(ifstream& file);
 

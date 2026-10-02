@@ -32,5 +32,5 @@ void Product::save_to_file(ofstream& file) const {
 string Product::to_string() {
 	return name + ", $" + std::format("{:.2f}", price)
 		+ " (discount " + std::to_string(discount_percent)
-		+ "), available " + std::to_string(stock) + " pcs";
+		+ "), available " + std::to_string(stock) + " pcs" + " popularity: " + std::to_string(order);
 }

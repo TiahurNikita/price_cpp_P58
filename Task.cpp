@@ -19,6 +19,8 @@ int main()
 			<< "3: Show price\n"
 			<< "4: Show from cheap to expensive\n"
 			<< "5: Show from expensive to cheap\n"
+			<< "6: Show from most popular to least\n"
+			<< "7: Show from least popular to most\n"
 			<< "0: Exit\n";
 
 		choice = _getch();
@@ -47,6 +49,12 @@ int main()
 			break;
 		case 53:  // '5'
 			price->show_by_price_descending();
+			break;
+		case 54:  // '6'
+			price->show_by_popularity_descending();
+			break;
+		case 55:  // '6'
+			price->show_by_popularity_ascending();
 			break;
 		case 48:  // '0'
 			return 0;
