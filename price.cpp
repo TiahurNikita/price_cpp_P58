@@ -174,6 +174,7 @@ void Price::show_by_price_ascending() {
 		while (node->next->next) {
 			if (node->next->product.price > node->next->next->product.price) {
 				_swap23(node);
+				is_ordered = false;
 			}
 			node = node->next;
 		}
@@ -184,8 +185,91 @@ void Price::show_by_price_ascending() {
 /*
 Реалізація методів:
 show_by_price_descending() - від дорогих цін до дешевих
-show_by_discount_ascending() - від малих знижок до великих
-show_by_discount_descending() - від великих знижок до малих
+
+1.Перевірка (first==NULL) - виводимо, що список порожній
+			(first->next == NULL) - виводимо єдиний елемент
+2.Сортування (В циклі, допоки покажчик is_ordered == false)
+    1)Створюємо прапорець is_ordered для перевірки повного сортування і ставимо його на true
+	  Встановлюємо покажчик node на перший елемент списку
+	2)Перевіряємо чи ціна першого елементу (node->product.price) < другого (node->next->product.price). 
+	  Якщо так, то змінюємо ці 2 елементи місцями за таким алгоритмом:
+	  f
+	  [p1|n]->[p2|n]->[p3|n]
+
+	     ---->f
+		     [p2|n]
+	  <--------|
+	  [p1|n]--------->[p3|n]
+	  - повертаємо node на first ("новий" початок)
+	  - ставимо прапорець is_ordered на false
+	3)Поки існує node->next->next
+	  Якщо node->next->product.price < node->next->next->product.price:
+	  -Змінюємо 2 ці 2 елементи місцями:
+	  p1 = node
+	  [p1|n]->[p2|n]->[p3|n]->[p4|n]
+	  [p1|n]--------->[p3|n]
+			[p4|n] <- [p2|n] <-----|
+	  - ставимо прапорець is_ordered на false
+	  переходимо до наступного вузла (node = node->next;)
+3.Виводимо результат методом show() після завершення циклу (is_ordered == true)
+	  
+show_by_discount_percent_ascending() - від малих знижок до великих
+
+1.Перевірка (first==NULL) - виводимо, що список порожній
+			(first->next == NULL) - виводимо єдиний елемент
+2.Сортування (В циклі, допоки покажчик is_ordered == false)
+	1)Створюємо прапорець is_ordered для перевірки повного сортування і ставимо його на true
+	  Встановлюємо покажчик node на перший елемент списку
+	2)Перевіряємо чи ціна першого елементу (node->product.discount_percent) > другого (node->next->product.discount_percent).
+	  Якщо так, то змінюємо ці 2 елементи місцями за таким алгоритмом:
+	  f
+	  [p1|n]->[p2|n]->[p3|n]
+
+		 ---->f
+			 [p2|n]
+	  <--------|
+	  [p1|n]--------->[p3|n]
+	  - повертаємо node на first ("новий" початок)
+	  - ставимо прапорець is_ordered на false
+	3)Поки існує node->next->next
+	  Якщо node->next->product.discount_percent > node->next->next->product.discount_percent:
+	  -Змінюємо 2 ці 2 елементи місцями:
+	  p1 = node
+	  [p1|n]->[p2|n]->[p3|n]->[p4|n]
+	  [p1|n]--------->[p3|n]
+			[p4|n] <- [p2|n] <-----|
+	  - ставимо прапорець is_ordered на false
+	  переходимо до наступного вузла (node = node->next;)
+3.Виводимо результат методом show() після завершення циклу (is_ordered == true)
+
+show_by_discount_percent_descending() - від великих знижок до малих
+
+1.Перевірка (first==NULL) - виводимо, що список порожній
+			(first->next == NULL) - виводимо єдиний елемент
+2.Сортування (В циклі, допоки покажчик is_ordered == false)
+	1)Створюємо прапорець is_ordered для перевірки повного сортування і ставимо його на true
+	  Встановлюємо покажчик node на перший елемент списку
+	2)Перевіряємо чи ціна першого елементу (node->product.discount_percent) < другого (node->next->product.discount_percent).
+	  Якщо так, то змінюємо ці 2 елементи місцями за таким алгоритмом:
+	  f
+	  [p1|n]->[p2|n]->[p3|n]
+
+		 ---->f
+			 [p2|n]
+	  <--------|
+	  [p1|n]--------->[p3|n]
+	  - повертаємо node на first ("новий" початок)
+	  - ставимо прапорець is_ordered на false
+	3)Поки існує node->next->next
+	  Якщо node->next->product.discount_percent < node->next->next->product.discount_percent:
+	  -Змінюємо 2 ці 2 елементи місцями:
+	  p1 = node
+	  [p1|n]->[p2|n]->[p3|n]->[p4|n]
+	  [p1|n]--------->[p3|n]
+			[p4|n] <- [p2|n] <-----|
+	  - ставимо прапорець is_ordered на false
+	  переходимо до наступного вузла (node = node->next;)
+3.Виводимо результат методом show() після завершення циклу (is_ordered == true)
 
 */
 /*
